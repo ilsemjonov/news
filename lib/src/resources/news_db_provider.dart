@@ -9,6 +9,10 @@ import 'repository.dart';
 class NewsDbProvider implements Source, Cache {
   Database db;
 
+  NewsDbProvider() {
+    init();
+  }
+
   // store and fetch topIds
   Future<List<int>> fetchTopIds() {
     return null;
@@ -53,7 +57,7 @@ class NewsDbProvider implements Source, Cache {
 
     if (maps.length > 0) {
       return ItemModel.fromDb(maps.first);
-    } 
+    }
 
     return null;
   }
