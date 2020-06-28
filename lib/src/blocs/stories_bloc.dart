@@ -7,11 +7,17 @@ class StoriesBloc {
   final _topIds = PublishSubject<List<int>>();
   final _items = BehaviorSubject<int>();
 
+  Observable<Map<int, Future<ItemModel>>> items;
+
   // getter to stream
   Observable<List<int>> get topIds => _topIds.stream;
 
   // getter to sink
   Function(int) get fetchItem => _items.sink.add;
+
+  StoriesBloc() {
+    items = _items.stream.transform(_itemsTransformer());
+  }
 
   fetchTopIds() async {
     final ids = await _repository.fetchTopIds();
