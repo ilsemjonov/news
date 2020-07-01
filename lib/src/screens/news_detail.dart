@@ -35,15 +35,24 @@ class NewsDetail extends StatelessWidget {
               return Text('loading');
             }
 
-            return buildTitle(itemSnapshot.data);
+            return buildList(itemSnapshot.data, snapshot.data);
           },
         );
       },
     );
   }
 
+  Widget buildList(ItemModel item, Map<int, Future<ItemModel>> itemMap) {
+    return ListView(
+      children: <Widget>[
+        buildTitle(item),
+      ],
+    );
+  }
+
   Widget buildTitle(ItemModel item) {
     return Container(
+      alignment: Alignment.topCenter,
       margin: EdgeInsets.all(10.0),
       child: Text(
         item.title,
